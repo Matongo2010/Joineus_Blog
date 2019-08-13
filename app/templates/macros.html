@@ -1,0 +1,8 @@
+{% macro displayPitches(pitch_list) %}
+    {% for post in post_list %}
+    
+        
+        <p> {{ post.post | truncate(30) }}</p>
+    
+    {% endfor %}
+{% endmacro %}

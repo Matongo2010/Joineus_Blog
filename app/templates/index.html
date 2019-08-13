@@ -1,0 +1,81 @@
+<div
+ style= "background-image: url('https://images.pexels.com/photos/270288/pexels-photo-270288.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');background-size:cover; background-repeat: no-repeat;">
+    
+    {% extends 'base.html'%} {% import 'macros.html' as macro%}{% import "bootstrap/wtf.html" as wtf %}
+
+
+
+    {% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+    {% endblock %}
+
+
+    {% block content %}
+    <div class="container">
+
+        <div class="head">
+            <h1> JOINEUS BLOG</h1>
+            <h2> Where Genius minds meet </h2
+            
+            
+
+        </div>
+        <div class="container">
+
+
+            <section>
+                <div class="conatiner">
+                    <div class="row align-items-center" style="text-align:center;      justify-content:center; color: white; ">
+
+                        <div class="col-md-5">
+                            <div class="card-body card-body-cascade text-center">
+                                
+
+                                
+                                   <p>{{quote.quote}}</p>
+
+                              http://127.0.0.1:5000/http://127.0.0.1:5000/  <h4>~ {{quote.author}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <div id="category">
+                <h2>No More Boredom!</h2>
+                <a class="btn btn-primary text-center " href="{{url_for('main.new_post')}}"><span></span> Add Blog
+                    Post</a>
+                <hr>
+
+                <h3> Posts Available:</h3>
+
+                {% for post in posts %}
+                <div class="panel panel-primary">
+
+                    <div class="panel-body">
+                        <p class='firstletter'>{{post.post_text}}</p>
+                    </div>
+                    {% if current_user.is_authenticated %}
+                    <div class="panel-footer">
+                        <a class="btn btn-success text-center" href="{{url_for('main.view_post', id=post.id)}}">View
+                            Comments</a>
+                        <a class="btn btn-warning text-center" href="{{url_for('main.update_post', id=post.id)}}">Update
+                            Post</a>
+                        <a class="btn btn-danger text-center" href="{{url_for('main.delete_post', id=post.id)}}">Delete
+                            Post</a>
+                    </div>
+
+                    {% else %}
+                    <div class="panel-footer"><a class="btn btn-primary text-center"
+                            href="{{url_for('main.view_post', id=post.id)}}">View Comments</a></div>
+                    {%endif%}
+                </div>
+                {% endfor %}
+            </div>
+        
+        </div>
+        {% endblock %}
+    </div>
+</div>
